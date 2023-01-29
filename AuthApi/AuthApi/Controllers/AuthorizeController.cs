@@ -1,7 +1,7 @@
 ﻿using AuthApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthAPİ.Controllers
+namespace AuthApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
