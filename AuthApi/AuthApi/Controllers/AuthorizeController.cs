@@ -5,12 +5,12 @@ namespace AuthAPİ.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AuthorizationController : ControllerBase
+    public class AuthorizeController : ControllerBase
     {
 
-        private readonly ILogger<AuthorizationController> _logger;
+        private readonly ILogger<AuthorizeController> _logger;
 
-        public AuthorizationController(ILogger<AuthorizationController> logger)
+        public AuthorizeController(ILogger<AuthorizeController> logger)
         {
             _logger = logger;
         }
