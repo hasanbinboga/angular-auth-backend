@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AuthApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AuthAPİ.Controllers
 {
@@ -6,10 +7,6 @@ namespace AuthAPİ.Controllers
     [Route("[controller]")]
     public class AuthorizationController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
 
         private readonly ILogger<AuthorizationController> _logger;
 
@@ -18,16 +15,23 @@ namespace AuthAPİ.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpPost]
+        public ApiResult<AuthToken> Login([FromBody] ApiRequest arg)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            if (arg != null && arg.Email == "sean@test.com" && arg.Password == "SeanPass")
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                return new ApiResult<AuthToken>
+                {
+                    Data = new AuthToken { UserGroup = 0, Token = "8a2cfe059e8642b7adc367c6415428a6" },
+                    Error = string.Empty,
+                    Status = ApiStatus.Ok
+                };
+            }
+            return new ApiResult<AuthToken>
+            {
+                Error = "Username or password is incorrect",
+                Status = ApiStatus.Error
+            };
         }
     }
 }
