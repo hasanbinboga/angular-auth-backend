@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AuthApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Authorize")]
     public class AuthorizeController : ControllerBase
     {
 
@@ -15,8 +15,16 @@ namespace AuthApi.Controllers
             _logger = logger;
         }
 
+        [Route("Get")]
         [HttpPost]
-        public ApiResult<AuthToken> Login([FromBody] ApiRequest arg)
+        public ApiResult<string> Get()
+        {
+            return new Models.ApiResult<string> { Data = "deneme", Status = ApiStatus.Ok, Error = "" };
+        }
+
+        [Route("Login")]
+        [HttpPost]
+        public ApiResult<AuthToken> Login(ApiRequest arg)
         {
             if (arg != null && arg.Email == "sean@test.com" && arg.Password == "SeanPass")
             {
