@@ -31,6 +31,17 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+var webSocketOptions = new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(2),
+    
+};
+
+webSocketOptions.AllowedOrigins.Add("*");
+webSocketOptions.AllowedOrigins.Add("http://localhost:4200");
+
+app.UseWebSockets(webSocketOptions);
+
 app.Run();
 
 
