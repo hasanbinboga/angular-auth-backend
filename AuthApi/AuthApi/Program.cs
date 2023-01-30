@@ -33,7 +33,8 @@ app.MapControllers();
 
 var webSocketOptions = new WebSocketOptions
 {
-    KeepAliveInterval = TimeSpan.FromMinutes(2)
+    KeepAliveInterval = TimeSpan.FromMinutes(2),
+    
 };
 
 webSocketOptions.AllowedOrigins.Add("*");
